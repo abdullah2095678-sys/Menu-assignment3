@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黒雪 · Kuroyuki Izakaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Zen+Old+Mincho:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0806;--paper:#f5f0e8;--ember:#c8520a;--gold:#c9a84c;--goldl:#e8c97a;--ash:#1e1a17;--mist:#8a8078;--red:#8b1a1a;--green:#4a8b4a;--cart-h:72px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'Crimson Pro',serif;font-weight:300;overflow-x:hidden;cursor:none}
+#cur,#cur2{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
+#cur{width:10px;height:10px;background:var(--gold);transition:width .2s,height .2s,background .2s}
+#cur2{width:36px;height:36px;border:1.5px solid rgba(201,168,76,.42);transition:width .3s,height .3s}
+body.hov #cur{width:22px;height:22px;background:var(--ember);opacity:.7}
+body.hov #cur2{width:58px;height:58px;opacity:.3}
+#ptc{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 50px;display:flex;justify-content:space-between;align-items:center;transition:background .4s,border-color .4s}
+nav.sc{background:rgba(8,6,4,.97);border-bottom:1px solid rgba(201,168,76,.12);backdrop-filter:blur(14px)}
+.nlogo{font-family:'Zen Old Mincho',serif;font-size:22px;color:var(--gold);text-decoration:none;letter-spacing:.2em;text-shadow:0 0 30px rgba(201,168,76,.4)}
+.nlinks{display:flex;gap:40px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);text-decoration:none;transition:color .2s;position:relative}
+.nlinks a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nlinks a:hover{color:var(--gold)}.nlinks a:hover::after{width:100%}
+.nphone{font-size:12px;letter-spacing:.1em;color:var(--mist)}
+
+/* CART BUTTON in nav */
+.ncart{display:flex;align-items:center;gap:8px;background:none;border:1px solid rgba(201,168,76,.35);padding:7px 16px;color:var(--gold);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:none;transition:all .25s;position:relative}
+.ncart:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.ncartcount{background:var(--ember);color:white;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;transition:transform .3s}
+.ncartcount.bump{animation:bump .3s ease}
+@keyframes bump{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 65% 45%,#1e0f04 0%,#0a0806 65%)}
+.hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=1600&q=80') center/cover no-repeat;opacity:.07;transform:scale(1.06);animation:bgd 20s ease-in-out infinite alternate}
+@keyframes bgd{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.12) translate(-1%,1%)}}
+.hov2{position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(200,82,10,.1) 0%,transparent 55%),radial-gradient(circle at 80% 20%,rgba(139,26,26,.08) 0%,transparent 55%)}
+.jps{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.jp{position:absolute;top:0;writing-mode:vertical-rl;font-family:'Zen Old Mincho',serif;font-size:10px;letter-spacing:.3em;line-height:1.2;padding:20px 0;animation:jpa 12s ease-in-out infinite}
+.jp:nth-child(1){left:3%;color:rgba(201,168,76,.055);animation-delay:0s}
+.jp:nth-child(2){left:8%;color:rgba(200,82,10,.04);animation-delay:2s}
+.jp:nth-child(3){right:5%;color:rgba(201,168,76,.05);animation-delay:1s}
+.jp:nth-child(4){right:10%;color:rgba(200,82,10,.04);animation-delay:3s}
+.jp:nth-child(5){left:48%;color:rgba(201,168,76,.03);animation-delay:1.5s}
+@keyframes jpa{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.25;transform:translateY(-12px)}}
+.orb{position:absolute;border-radius:50%;animation:op 5s ease-in-out infinite}
+.orb.a{width:420px;height:420px;background:radial-gradient(circle,rgba(200,82,10,.18) 0%,transparent 70%);top:8%;right:10%;animation-delay:0s}
+.orb.b{width:280px;height:280px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%);bottom:18%;left:8%;animation-delay:2s}
+.orb.c{width:180px;height:180px;background:radial-gradient(circle,rgba(139,26,26,.14) 0%,transparent 70%);top:55%;right:33%;animation-delay:3.5s}
+@keyframes op{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.55}}
+.hi{text-align:center;z-index:2;padding:40px}
+.hk{font-family:'Zen Old Mincho',serif;font-size:clamp(72px,13vw,144px);color:var(--gold);letter-spacing:.15em;line-height:1;text-shadow:0 0 80px rgba(201,168,76,.35),0 0 160px rgba(201,168,76,.1);opacity:0;animation:su 1.2s .1s cubic-bezier(.22,1,.36,1) forwards}
+.hn{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,78px);font-weight:300;letter-spacing:.38em;text-transform:uppercase;color:var(--paper);margin:6px 0;opacity:0;animation:su 1.2s .25s cubic-bezier(.22,1,.36,1) forwards}
+.hsub{font-style:italic;font-size:17px;letter-spacing:.2em;color:var(--mist);opacity:0;animation:su 1.2s .4s cubic-bezier(.22,1,.36,1) forwards}
+.hhr{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px auto;opacity:0;animation:su 1.2s .55s cubic-bezier(.22,1,.36,1) forwards}
+.hhr .hl{display:block;width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hhr .hl:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
+.hhr .hd{width:5px;height:5px;background:var(--gold);border-radius:50%}
+.hmeta{font-size:13px;letter-spacing:.15em;color:var(--mist);text-transform:uppercase;opacity:0;animation:su 1.2s .7s cubic-bezier(.22,1,.36,1) forwards}
+.hmeta strong{color:var(--goldl)}
+.hcta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:13px 30px;border:1px solid rgba(201,168,76,.4);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:all .3s;opacity:0;animation:su 1.2s .85s cubic-bezier(.22,1,.36,1) forwards;cursor:none}
+.hcta:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.scue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.42;animation:bob 2.4s ease-in-out infinite;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--mist)}
+.scue::after{content:'';display:block;width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes su{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* INFO BAR */
+.ibar{background:var(--ash);border-top:1px solid rgba(201,168,76,.12);border-bottom:1px solid rgba(201,168,76,.12);padding:16px 40px;display:flex;justify-content:center;gap:50px;flex-wrap:wrap;position:relative;z-index:2}
+.ii{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.12em;color:var(--mist);text-transform:uppercase}
+.ii .ic{color:var(--gold);font-size:14px}.ii strong{color:var(--paper)}
+
+/* FILTER BAR */
+.fbar{position:sticky;top:0;z-index:400;background:rgba(10,8,6,.95);border-bottom:1px solid rgba(201,168,76,.1);padding:12px 40px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;backdrop-filter:blur(12px)}
+.ftag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(201,168,76,.2);padding:5px 14px;color:var(--mist);background:none;cursor:none;transition:all .2s;border-radius:2px}
+.ftag.active,.ftag:hover{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold)}
+.flabel{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.4);padding-right:6px}
+
+/* SECTIONS */
+.sec{padding:110px 50px;max-width:1140px;margin:0 auto;position:relative;z-index:2}
+.sh{text-align:center;margin-bottom:72px}
+.stag{font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:14px}
+.stit{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:var(--paper);letter-spacing:.05em;line-height:1.1}
+.skj{font-family:'Zen Old Mincho',serif;font-size:13px;letter-spacing:.22em;color:rgba(201,168,76,.3);display:block;margin-top:8px}
+
+/* ABOUT */
+.aw{display:grid;grid-template-columns:1fr 2px 1fr;gap:0 70px;align-items:start;max-width:960px;margin:0 auto}
+.avd{background:linear-gradient(to bottom,transparent,var(--gold),transparent);align-self:stretch}
+.al{text-align:right}
+.ak{font-family:'Zen Old Mincho',serif;font-size:100px;color:rgba(201,168,76,.09);line-height:1;margin-bottom:-22px}
+.alb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:12px}
+.ah{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1.2;color:var(--paper);margin-bottom:18px}
+.ap{font-size:16px;line-height:1.85;color:rgba(245,240,232,.58);font-style:italic}
+.atags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;justify-content:flex-end}
+.atag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;border:1px solid rgba(201,168,76,.3);padding:4px 12px;color:var(--gold);border-radius:2px}
+.mtb{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);padding:22px 26px;border-radius:4px;margin-top:26px}
+.mtlb{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:5px}
+.mtnm{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--goldl);margin-bottom:6px}
+.mtd{font-size:14px;color:var(--mist);font-style:italic;line-height:1.6}
+
+/* MENU CARDS */
+.ch{display:flex;align-items:center;gap:22px;margin-bottom:44px}
+.ch::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.28),transparent)}
+.cjp{font-family:'Zen Old Mincho',serif;font-size:30px;color:rgba(201,168,76,.18);line-height:1}
+.ct{font-family:'Cormorant Garamond',serif;font-size:33px;font-weight:300;color:var(--paper);letter-spacing:.1em;line-height:1}
+.cs{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:3px;margin-bottom:50px}
+.mc{position:relative;overflow:hidden;cursor:none;background:rgba(255,255,255,.014);border:1px solid rgba(255,255,255,.038);transition:border-color .35s,background .35s,transform .35s}
+.mc.hidden{display:none}
+.mc:hover{background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.18);transform:translateY(-3px)}
+.mc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ember);transform:scaleY(0);transform-origin:bottom;transition:transform .35s;z-index:2}
+.mc:hover::before{transform:scaleY(1)}
+.miw{overflow:hidden;position:relative}
+.miw::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(10,8,6,.9))}
+.mi{width:100%;height:200px;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1),filter .4s}
+.mc:hover .mi{transform:scale(1.07);filter:brightness(1.08) saturate(1.1)}
+.mb{padding:22px 26px 20px}
+.mt2{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:7px}
+.mn{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--paper);line-height:1.25;flex:1}
+.mjp{display:block;font-family:'Zen Old Mincho',serif;font-size:11px;color:rgba(201,168,76,.38);margin-top:3px;letter-spacing:.12em}
+.mp{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);white-space:nowrap;font-weight:600}
+.md{font-size:13.5px;color:rgba(245,240,232,.42);font-style:italic;line-height:1.65;margin-bottom:12px}
+.mbd{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.badge{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
+.bv{background:rgba(74,123,74,.22);color:#7bc97b;border:1px solid rgba(74,123,74,.28)}
+.bs{background:rgba(200,82,10,.18);color:#e87a40;border:1px solid rgba(200,82,10,.28)}
+.bc{background:rgba(201,168,76,.16);color:var(--goldl);border:1px solid rgba(201,168,76,.32)}
+.bn{background:rgba(139,26,26,.22);color:#e08080;border:1px solid rgba(139,26,26,.38)}
+
+/* CARD BUTTONS */
+.card-btns{display:flex;gap:6px;flex-wrap:wrap}
+.nb{display:flex;align-items:center;gap:6px;padding:5px 12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:none;transition:all .25s;border-radius:2px;width:max-content;background:none}
+.nb-info{color:var(--mist);border:1px solid rgba(138,128,120,.2)}
+.nb-info:hover{color:var(--gold);border-color:rgba(201,168,76,.4)}
+.nb-order{color:var(--ember);border:1px solid rgba(200,82,10,.3);background:rgba(200,82,10,.06)}
+.nb-order:hover{background:rgba(200,82,10,.16);border-color:var(--ember);color:var(--goldl)}
+.nb svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+.nb-info:hover .nb-info-svg{transform:rotate(180deg)}
+.nb-info-svg{transition:transform .25s}
+
+/* SPECIAL CARD */
+.spc{grid-column:1/-1;background:linear-gradient(135deg,rgba(139,26,26,.14) 0%,rgba(200,82,10,.07) 50%,rgba(201,168,76,.07) 100%);border:1px solid rgba(201,168,76,.22);position:relative;overflow:hidden;cursor:none}
+.spc::after{content:'★ 料理長特選';position:absolute;right:-28px;top:22px;transform:rotate(90deg);font-family:'Zen Old Mincho',serif;font-size:10px;letter-spacing:.2em;color:rgba(201,168,76,.12)}
+.spc:hover{background:linear-gradient(135deg,rgba(139,26,26,.2) 0%,rgba(200,82,10,.12) 50%,rgba(201,168,76,.12) 100%)}
+.sci{display:grid;grid-template-columns:360px 1fr;gap:0}
+.simg{width:100%;height:280px;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.spc:hover .simg{transform:scale(1.04)}
+.scnt{padding:36px 40px}
+.srb{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.13);border:1px solid rgba(201,168,76,.32);padding:4px 14px;border-radius:2px;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.srb::before{content:'✦'}
+.snm{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--paper);margin-bottom:4px}
+.sjp{font-family:'Zen Old Mincho',serif;font-size:13px;color:rgba(201,168,76,.38);letter-spacing:.15em;display:block;margin-bottom:13px}
+.sds{font-size:15px;font-style:italic;color:rgba(245,240,232,.56);line-height:1.8;max-width:500px;margin-bottom:18px}
+.spr{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);font-weight:600}
+
+/* COMBO */
+.cbw{background:linear-gradient(135deg,#170d04,#100c08);border:1px solid rgba(200,82,10,.28);padding:44px;margin-bottom:80px;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 54px;align-items:center;position:relative;overflow:hidden}
+.cbw::before{content:'お得';position:absolute;font-family:'Zen Old Mincho',serif;font-size:140px;color:rgba(200,82,10,.035);right:6px;top:-30px;pointer-events:none}
+.cvd{background:linear-gradient(to bottom,transparent,rgba(200,82,10,.45),transparent);align-self:stretch}
+.ctg{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:10px}
+.ctit{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--paper);font-weight:300;margin-bottom:10px}
+.cds{font-size:15px;color:var(--mist);font-style:italic;line-height:1.72}
+.cpb{margin-top:18px;display:flex;align-items:baseline;gap:12px}
+.cw{font-size:15px;color:var(--mist);text-decoration:line-through}
+.cn{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--ember);font-weight:600}
+.csv{font-size:11px;background:rgba(200,82,10,.18);color:#e07040;border:1px solid rgba(200,82,10,.28);padding:3px 10px;border-radius:2px;letter-spacing:.1em}
+.cl{list-style:none}
+.cl li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.045);font-size:15px;color:rgba(245,240,232,.68);display:flex;justify-content:space-between;align-items:center}
+.cl li:last-child{border-bottom:none}
+.cl li::before{content:'—';color:var(--ember);margin-right:10px}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:56px}
+.sep{display:block;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.1),transparent)}
+
+/* FOOTER */
+footer{background:#050403;border-top:1px solid rgba(201,168,76,.09);padding:70px 40px;text-align:center;position:relative;z-index:2}
+.fk{font-family:'Zen Old Mincho',serif;font-size:52px;color:rgba(201,168,76,.12);letter-spacing:.22em;display:block;margin-bottom:18px}
+.fn{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.4em;text-transform:uppercase;color:var(--mist);margin-bottom:8px}
+.fa{font-size:13px;color:rgba(138,128,120,.55);letter-spacing:.1em;margin-bottom:26px}
+.fhs{display:flex;justify-content:center;gap:44px;flex-wrap:wrap;margin-bottom:28px}
+.fh{text-align:center}
+.fh .dy{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:3px}
+.fh .tm{font-size:15px;color:var(--mist);font-style:italic}
+.fls{display:flex;justify-content:center;gap:22px;margin-bottom:28px;flex-wrap:wrap}
+.fls a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(138,128,120,.5);text-decoration:none;border-bottom:1px solid rgba(138,128,120,.18);padding-bottom:2px;transition:color .2s,border-color .2s}
+.fls a:hover{color:var(--gold);border-color:var(--gold)}
+.fcp{font-size:11px;color:rgba(138,128,120,.28);letter-spacing:.1em}
+.fu{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+/* MODAL (Nutrition + Customization) */
+.mov{position:fixed;inset:0;background:rgba(4,3,2,.92);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(14px)}
+.mov.open{opacity:1;pointer-events:all}
+.mod{background:linear-gradient(160deg,#15110d,#1a1510);border:1px solid rgba(201,168,76,.2);max-width:700px;width:94%;max-height:92vh;overflow-y:auto;position:relative;transform:scale(.93) translateY(22px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.mov.open .mod{transform:scale(1) translateY(0)}
+.moh{position:relative;height:260px;overflow:hidden}
+.moh img{width:100%;height:100%;object-fit:cover;display:block}
+.moh::after{content:'';position:absolute;bottom:0;left:0;right:0;height:140px;background:linear-gradient(to bottom,transparent,#15110d)}
+.mox{position:absolute;top:14px;right:16px;width:34px;height:34px;background:rgba(8,6,4,.72);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:none;transition:background .2s;border-radius:2px;z-index:10}
+.mox:hover{background:rgba(200,82,10,.35)}
+.mob{padding:28px 36px 36px}
+.moname{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--paper);margin-bottom:3px}
+.mojp{font-family:'Zen Old Mincho',serif;font-size:12px;color:rgba(201,168,76,.38);letter-spacing:.15em;display:block;margin-bottom:10px}
+.mopr{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);font-weight:600;margin-bottom:14px}
+.mods{font-size:15px;color:rgba(245,240,232,.52);font-style:italic;line-height:1.75;margin-bottom:26px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:22px}
+
+/* TABS */
+.mtabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:24px}
+.mtab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:10px 20px;cursor:none;border:none;background:none;color:var(--mist);border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px}
+.mtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.mtab:hover{color:var(--paper)}
+.tpanel{display:none}
+.tpanel.active{display:block}
+
+/* NUTRITION */
+.ntit{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ember);margin-bottom:16px;display:block}
+.ng{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:22px}
+.nc{background:rgba(255,255,255,.034);border:1px solid rgba(255,255,255,.055);padding:14px 10px;text-align:center;border-radius:3px}
+.nv{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);font-weight:600;display:block;line-height:1}
+.nu{font-size:10px;color:var(--mist);letter-spacing:.1em}
+.nl{font-size:10.5px;color:rgba(245,240,232,.5);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;display:block}
+.nbs{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.nbr{display:flex;align-items:center;gap:12px}
+.nbl{font-size:12px;color:var(--mist);width:80px;text-align:right;letter-spacing:.08em}
+.nbt{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.nbf{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.22,1,.36,1);width:0}
+.nbf.c{background:linear-gradient(90deg,var(--ember),var(--gold))}
+.nbf.p{background:linear-gradient(90deg,#4a9,#7ecf7e)}
+.nbf.f{background:linear-gradient(90deg,#c8820a,#e8c97a)}
+.nbf.k{background:linear-gradient(90deg,#6a3fa0,#a07adc)}
+.nbp{font-size:11px;color:var(--mist);width:36px}
+.ar{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.al2{font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid rgba(200,82,10,.3);color:#e07040;background:rgba(200,82,10,.1)}
+
+/* CUSTOMIZATION */
+.cust-section{margin-bottom:22px}
+.cust-title{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ember);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cust-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+
+/* SPICE METER */
+.spice-row{display:flex;gap:8px;align-items:center}
+.spice-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(200,82,10,.3);background:none;cursor:none;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--mist)}
+.spice-btn.active{border-color:var(--ember);background:rgba(200,82,10,.18);color:var(--ember)}
+.spice-btn:hover{border-color:var(--ember);background:rgba(200,82,10,.1)}
+.spice-label{font-size:13px;color:var(--mist);margin-left:6px;font-style:italic}
+
+/* TOGGLE INGREDIENTS */
+.ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ing-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid rgba(255,255,255,.055);border-radius:3px;cursor:none;transition:all .2s;background:rgba(255,255,255,.02)}
+.ing-item.removed{background:rgba(139,26,26,.12);border-color:rgba(139,26,26,.3)}
+.ing-item.removed .ing-name{text-decoration:line-through;color:rgba(245,240,232,.3)}
+.ing-toggle{width:18px;height:18px;border-radius:3px;border:1.5px solid rgba(201,168,76,.4);background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.ing-item.removed .ing-toggle{background:rgba(139,26,26,.3);border-color:rgba(139,26,26,.5)}
+.ing-name{font-size:13px;color:rgba(245,240,232,.7);letter-spacing:.05em}
+.ing-item:hover{border-color:rgba(201,168,76,.25)}
+
+/* ADD-ONS */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.addon-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid rgba(255,255,255,.055);border-radius:3px;cursor:none;transition:all .2s;background:rgba(255,255,255,.02)}
+.addon-item.selected{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.25)}
+.addon-left{display:flex;align-items:center;gap:8px}
+.addon-check{width:16px;height:16px;border-radius:2px;border:1.5px solid rgba(201,168,76,.3);background:none;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);transition:all .2s;flex-shrink:0}
+.addon-item.selected .addon-check{background:rgba(201,168,76,.2);border-color:var(--gold)}
+.addon-name{font-size:13px;color:rgba(245,240,232,.7)}
+.addon-price{font-size:12px;color:var(--gold);font-family:'Cormorant Garamond',serif}
+
+/* SIZE OPTIONS */
+.size-row{display:flex;gap:8px}
+.size-btn{flex:1;padding:9px 6px;border:1.5px solid rgba(255,255,255,.055);background:none;cursor:none;transition:all .2s;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);border-radius:3px;text-align:center}
+.size-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08)}
+.size-price{font-size:11px;display:block;color:rgba(201,168,76,.6);margin-top:2px}
+
+/* TEMP & SAUCE */
+.opt-row{display:flex;gap:8px;flex-wrap:wrap}
+.opt-btn{padding:7px 14px;border:1.5px solid rgba(255,255,255,.055);background:none;cursor:none;transition:all .2s;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);border-radius:2px}
+.opt-btn.active{border-color:rgba(201,168,76,.5);color:var(--gold);background:rgba(201,168,76,.07)}
+.opt-btn:hover{border-color:rgba(201,168,76,.3);color:rgba(201,168,76,.7)}
+
+/* SPECIAL NOTES */
+.notes-area{width:100%;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:12px 14px;color:var(--paper);font-family:'Crimson Pro',serif;font-size:14px;font-style:italic;resize:vertical;min-height:70px;border-radius:3px;outline:none;transition:border-color .2s}
+.notes-area:focus{border-color:rgba(201,168,76,.3)}
+.notes-area::placeholder{color:rgba(138,128,120,.4)}
+
+/* ORDER SUMMARY + ADD TO ORDER */
+.order-summary{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);padding:16px 20px;border-radius:3px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.os-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.os-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);font-weight:600}
+.add-to-order-btn{width:100%;padding:14px;background:linear-gradient(135deg,rgba(200,82,10,.3),rgba(201,168,76,.15));border:1px solid rgba(200,82,10,.5);color:var(--paper);font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:none;transition:all .3s;border-radius:2px;font-family:'Crimson Pro',serif}
+.add-to-order-btn:hover{background:linear-gradient(135deg,rgba(200,82,10,.5),rgba(201,168,76,.25));border-color:var(--ember)}
+.add-to-order-btn:active{transform:scale(.98)}
+
+/* CART PANEL */
+.cart-panel{position:fixed;right:0;top:0;bottom:0;width:380px;background:linear-gradient(160deg,#15110d,#12100d);border-left:1px solid rgba(201,168,76,.15);z-index:900;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;overflow:hidden}
+.cart-panel.open{transform:translateX(0)}
+.cart-header{padding:24px 24px 18px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.cart-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--paper);font-weight:300;letter-spacing:.1em}
+.cart-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);margin-top:3px}
+.cart-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border:1px solid rgba(201,168,76,.2);background:none;color:var(--gold);cursor:none;display:flex;align-items:center;justify-content:center;border-radius:2px;transition:background .2s}
+.cart-close:hover{background:rgba(200,82,10,.2)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-item{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;gap:5px;position:relative}
+.ci-top{display:flex;justify-content:space-between;align-items:flex-start}
+.ci-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--paper)}
+.ci-price{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold)}
+.ci-mods{font-size:12px;color:var(--mist);font-style:italic;line-height:1.5}
+.ci-qty{display:flex;align-items:center;gap:10px;margin-top:6px}
+.qty-btn{width:24px;height:24px;border:1px solid rgba(201,168,76,.2);background:none;color:var(--gold);cursor:none;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:2px;transition:all .2s}
+.qty-btn:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.qty-num{font-size:14px;color:var(--paper);width:20px;text-align:center}
+.ci-remove{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(139,26,26,.7);cursor:none;background:none;border:none;transition:color .2s;margin-left:auto}
+.ci-remove:hover{color:#e08080}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--mist);font-style:italic;font-size:15px}
+.cart-empty-jp{font-family:'Zen Old Mincho',serif;font-size:40px;color:rgba(201,168,76,.1);display:block;margin-bottom:14px}
+.cart-footer{padding:20px 24px;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.cart-total-label{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mist)}
+.cart-total-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);font-weight:600}
+.cart-checkout-btn{width:100%;padding:14px;background:linear-gradient(135deg,#c8520a,#9a3d08);border:none;color:white;font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:none;transition:all .3s;border-radius:2px;font-family:'Crimson Pro',serif}
+.cart-checkout-btn:hover{background:linear-gradient(135deg,#e06020,#b8480a)}
+.cart-clear{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(138,128,120,.4);cursor:none;background:none;border:none;width:100%;text-align:center;padding:10px;transition:color .2s}
+.cart-clear:hover{color:var(--mist)}
+.cart-items::-webkit-scrollbar{width:3px}
+.cart-items::-webkit-scrollbar-track{background:transparent}
+.cart-items::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(30,26,23,.97);border:1px solid rgba(201,168,76,.3);padding:12px 24px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);z-index:2000;opacity:0;transition:all .4s;border-radius:2px;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* REVIEW STARS */
+.stars-row{display:flex;gap:4px;margin-bottom:8px}
+.star{font-size:16px;cursor:none;transition:transform .2s}
+.star:hover{transform:scale(1.2)}
+.review-count{font-size:12px;color:var(--mist);font-style:italic}
+
+.mod::-webkit-scrollbar{width:4px}.mod::-webkit-scrollbar-track{background:transparent}.mod::-webkit-scrollbar-thumb{background:rgba(201,168,76,.25);border-radius:2px}
+
+/* CART OVERLAY */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:850;opacity:0;pointer-events:none;transition:opacity .4s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+
+@media(max-width:900px){
+  .sci{grid-template-columns:1fr}.simg{height:220px}
+  .cbw{grid-template-columns:1fr}.cvd{display:none}
+  .aw{grid-template-columns:1fr;gap:40px}.avd{display:none}
+  .dg{grid-template-columns:1fr 1fr}.ng{grid-template-columns:repeat(2,1fr)}
+  nav{padding:14px 20px}.nlinks{gap:20px}.nphone{display:none}
+  .cart-panel{width:100%}
+  .fbar{padding:10px 16px}
+  .ing-grid,.addon-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .dg{grid-template-columns:1fr}.sec{padding:70px 20px}
+  .ibar{gap:20px;padding:14px 20px}.mg{grid-template-columns:1fr}
+  .mob{padding:20px 20px 28px}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur2"></div>
+<canvas id="ptc"></canvas>
+<div class="toast" id="toast"></div>
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<nav id="nav">
+  <a href="#" class="nlogo">黒雪</a>
+  <ul class="nlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#starters">Starters</a></li>
+    <li><a href="#mains">Mains</a></li>
+    <li><a href="#desserts">Desserts</a></li>
+    <li><a href="#drinks">Drinks</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px">
+    <span class="nphone">416 · 902 · 7740</span>
+    <button class="ncart" onclick="toggleCart()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h11v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H15c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 19.5 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+      Order
+      <span class="ncartcount" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- FILTER BAR -->
+<div class="fbar" id="fbar" style="display:none">
+  <span class="flabel">Filter:</span>
+  <button class="ftag active" onclick="filterMenu('all',this)">All</button>
+  <button class="ftag" onclick="filterMenu('veg',this)">🌿 Vegetarian</button>
+  <button class="ftag" onclick="filterMenu('spicy',this)">🌶 Spicy</button>
+  <button class="ftag" onclick="filterMenu('special',this)">✦ Chef's Special</button>
+  <button class="ftag" onclick="filterMenu('seafood',this)">🌊 Seafood</button>
+  <button class="ftag" onclick="filterMenu('gf',this)">🚫 Gluten-Free</button>
+</div>
+
+<header class="hero">
+  <div class="hbg"></div><div class="hov2"></div>
+  <div class="jps">
+    <div class="jp">居酒屋・和食・夜の味わい・職人の技・黒雪・本格派・炭火焼き</div>
+    <div class="jp">旬の食材・丹精込めた料理・日本の伝統・心のこもったおもてなし</div>
+    <div class="jp">黒雪居酒屋・魂の料理・夜の静寂・炎の味・情熱</div>
+    <div class="jp">新鮮・本物・伝統・情熱・職人・季節・厳選素材</div>
+    <div class="jp">炉端焼き・刺身・鍋料理・串焼き・日本酒</div>
+  </div>
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="hi">
+    <div class="hk">黒雪</div>
+    <h1 class="hn">Kuroyuki</h1>
+    <p class="hsub">Izakaya &amp; Robatayaki — Toronto</p>
+    <div class="hhr"><span class="hl"></span><span class="hd"></span><span class="hd" style="opacity:.4"></span><span class="hd" style="opacity:.18"></span><span class="hl"></span></div>
+    <p class="hmeta"><strong>Authentic Japanese</strong> &nbsp;·&nbsp; Robata Grill &nbsp;·&nbsp; 75+ Sakes<br><span style="font-size:12px;margin-top:5px;display:block;">290 King St W, Toronto · @kuroyuki.to</span></p>
+    <a href="#starters" class="hcta">Explore the Menu ↓</a>
+  </div>
+  <div class="scue">Scroll</div>
+</header>
+
+<div class="ibar">
+  <div class="ii"><span class="ic">◷</span> Mon–Thu <strong>5pm–11pm</strong></div>
+  <div class="ii"><span class="ic">◷</span> Fri–Sun <strong>4pm–1am</strong></div>
+  <div class="ii"><span class="ic">✆</span> <strong>416-902-7740</strong></div>
+  <div class="ii"><span class="ic">⌂</span> 290 King St W, Toronto</div>
+  <div class="ii"><span class="ic">🍶</span> <strong>Sake Bar Open Late</strong></div>
+</div>
+
+<!-- ABOUT -->
+<div style="background:linear-gradient(180deg,#0a0806,#0e0c09,#0a0806);position:relative;z-index:2">
+<section class="sec" id="about">
+  <div class="sh fu"><span class="stag">Our Story</span><h2 class="stit">The Spirit of the Izakaya</h2><span class="skj">居酒屋の精神</span></div>
+  <div class="aw fu">
+    <div class="al">
+      <div class="ak">炎</div><span class="alb">Since 2019</span>
+      <h3 class="ah">Where Ember Meets<br>Winter Night</h3>
+      <p class="ap">Kuroyuki — meaning "black snow" — was born from one vision: to recreate the soul of a Tokyo back-alley izakaya in the heart of Toronto. Our robata grill burns with white-oak charcoal from Wakayama Prefecture, and every dish honours the Japanese principle of <em>ma</em> — the beauty of what is left unsaid.</p>
+      <div class="atags"><span class="atag">🌿 Vegetarian Friendly</span><span class="atag">🌊 Fresh Daily Fish</span><span class="atag">🍶 75+ Sakes</span></div>
+    </div>
+    <div class="avd"></div>
+    <div>
+      <p class="ap" style="margin-bottom:20px">Our chefs train under the omakase tradition. We source Wagyu from Miyazaki, salmon from Hokkaido, and tofu pressed fresh each morning in our kitchen.</p>
+      <p class="ap" style="margin-bottom:26px">Low light, warm cedar, quiet jazz, and the hiss of skewers over coals. This is not just a restaurant. It is an evening.</p>
+      <div class="mtb"><span class="mtlb">Menu Type</span><div class="mtnm">À la Carte</div><p class="mtd">Every dish is priced individually, giving you complete freedom to compose your own experience — one small plate, one skewer, one sake at a time.</p></div>
+    </div>
+  </div>
+</section></div>
+<span class="sep"></span>
+
+<!-- STARTERS -->
+<div style="background:#090706;position:relative;z-index:2">
+<section class="sec" id="starters">
+  <div class="sh fu"><span class="stag">To Begin</span><h2 class="stit">Starters &amp; Small Plates</h2><span class="skj">先付け・小皿料理</span></div>
+  <div class="ch fu"><div><div class="cjp">前菜</div><div class="ct">Starters</div><div class="cs">Appetizers</div></div></div>
+  <div class="mg fu" id="starters-grid">
+    <div class="mc spc" data-tags="special seafood" onclick="openModal('toro')">
+      <div class="sci">
+        <div><img class="simg" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=700&q=90" alt="Toro Tartare" loading="lazy"></div>
+        <div class="scnt">
+          <div class="srb">Chef's Special</div>
+          <div class="snm">Toro Tartare with Black Truffle</div>
+          <span class="sjp">とろのタルタル・黒トリュフ添え</span>
+          <p class="sds">Hand-chopped bluefin toro, Hokkaido uni, black truffle shavings, and a dashi-soy emulsion. Served on cold stone with crisp nori crisps and yuzu kosho.</p>
+          <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-top:14px">
+            <div class="spr">$28</div>
+            <div class="card-btns">
+              <button class="nb nb-info" onclick="event.stopPropagation();openModal('toro','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button>
+              <button class="nb nb-order" onclick="event.stopPropagation();openModal('toro','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Order &amp; Customize</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mc" data-tags="veg" onclick="openModal('edamame')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&q=85" alt="Edamame" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Edamame Shichimi<span class="mjp">枝豆・七味</span></div><div class="mp">$7</div></div><p class="md">Steamed young soybeans tossed in brown butter, togarashi, and fine sea salt.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('edamame','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('edamame','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="veg" onclick="openModal('agedashi')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&q=85" alt="Agedashi Tofu" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Agedashi Tofu<span class="mjp">揚げ出し豆腐</span></div><div class="mp">$12</div></div><p class="md">House-pressed silken tofu, fried in rice flour, in a smoky dashi broth with grated daikon and katsuobushi.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('agedashi','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('agedashi','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="spicy" onclick="openModal('karaage')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1630431341973-02e1b662ec35?w=600&q=85" alt="Karaage" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Karaage Chicken<span class="mjp">鶏の唐揚げ</span></div><div class="mp">$14</div></div><p class="md">Double-fried Cornish hen thighs in ginger, sake, and white soy. Kewpie mayo and pickled ginger.</p><div class="mbd"><span class="badge bs">🌶 Mild Heat</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('karaage','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('karaage','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="seafood" onclick="openModal('tataki')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=600&q=85" alt="Salmon Tataki" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Salmon Tataki<span class="mjp">サーモンたたき</span></div><div class="mp">$17</div></div><p class="md">Lightly seared Hokkaido salmon over ponzu jelly, crispy shallots, micro shiso, and sesame oil.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('tataki','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('tataki','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="spicy seafood" onclick="openModal('tunarice')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=85" alt="Spicy Tuna Rice" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Spicy Tuna Crispy Rice<span class="mjp">スパイシーツナ・クリスピーライス</span></div><div class="mp">$19</div></div><p class="md">Golden fried sushi rice cakes topped with spicy tuna, cucumber, and sriracha aioli.</p><div class="mbd"><span class="badge bs">🌶 Spicy</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('tunarice','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('tunarice','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+  </div>
+</section></div>
+<span class="sep"></span>
+
+<!-- MAINS -->
+<div style="background:linear-gradient(180deg,#090706,#0d0b08,#090706);position:relative;z-index:2">
+<section class="sec" id="mains">
+  <div class="sh fu"><span class="stag">The Heart of the Kitchen</span><h2 class="stit">Robata &amp; Mains</h2><span class="skj">炉端焼き・メイン料理</span></div>
+  <div class="ch fu"><div><div class="cjp">炉端</div><div class="ct">Robatayaki Grill</div><div class="cs">Charcoal-fired over Wakayama white-oak</div></div></div>
+  <div class="mg fu" id="mains-grid">
+    <div class="mc" data-tags="special" onclick="openModal('wagyu')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=90" alt="Wagyu" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Wagyu Beef Skewers ×3<span class="mjp">和牛串焼き</span></div><div class="mp">$32</div></div><p class="md">A5 Miyazaki Wagyu, medium-rare, finished with truffle salt and fresh wasabi root.</p><div class="mbd"><span class="badge bc">✦ Chef's Special</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('wagyu','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('wagyu','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="seafood gf" onclick="openModal('shioyaki')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=85" alt="Salmon" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Salmon Shioyaki<span class="mjp">鮭の塩焼き</span></div><div class="mp">$26</div></div><p class="md">Whole deboned Hokkaido salmon fillet, salt-grilled to crispy skin. Sudachi wedge and pickled cucumbers.</p><div class="mbd"><span class="badge bv">🚫 GF</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('shioyaki','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('shioyaki','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="seafood special" onclick="openModal('blackcod')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&q=85" alt="Black Cod" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Miso Black Cod<span class="mjp">銀だらの西京焼き</span></div><div class="mp">$34</div></div><p class="md">Saikyo miso-marinated black cod, baked three days. Silken, caramelized, paired with dashi-drenched rice.</p><div class="mbd"><span class="badge bc">✦ Signature</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('blackcod','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('blackcod','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="veg" onclick="openModal('dengaku')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=600&q=85" alt="Mushrooms" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Kinoko Dengaku<span class="mjp">きのこ田楽</span></div><div class="mp">$18</div></div><p class="md">Maitake, shiitake, and king oyster mushrooms grilled with sweet white miso glaze.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('dengaku','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('dengaku','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="spicy" onclick="openModal('ramen')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=90" alt="Ramen" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Spicy Tonkotsu Ramen<span class="mjp">辛口豚骨ラーメン</span></div><div class="mp">$21</div></div><p class="md">18-hour pork broth, wavy hakata noodles, chashu belly, marinated egg, nori, and black garlic oil.</p><div class="mbd"><span class="badge bs">🌶 Spicy</span><span class="badge bn">Fan Fav</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('ramen','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('ramen','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="seafood" onclick="openModal('gyoza')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=600&q=85" alt="Gyoza" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Prawn &amp; Shiso Gyoza ×6<span class="mjp">海老と紫蘇の餃子</span></div><div class="mp">$16</div></div><p class="md">Pan-fried dumplings with tiger prawn, shiso, and water chestnut. Yuzu ponzu dipping sauce.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('gyoza','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('gyoza','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" onclick="openModal('tsukune')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&q=85" alt="Tsukune" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Duck Tsukune<span class="mjp">鴨のつくね</span></div><div class="mp">$22</div></div><p class="md">Minced duck and shiso meatballs, glazed in tare sauce, with a slow-cooked egg and scallion.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('tsukune','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('tsukune','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+  </div>
+</section></div>
+<span class="sep"></span>
+
+<!-- COMBO DEAL -->
+<div style="background:#080605;position:relative;z-index:2;padding:0 50px">
+<div style="max-width:1140px;margin:0 auto;padding:80px 0" class="fu">
+  <div style="text-align:center;margin-bottom:44px"><span class="stag">Best Value</span><h2 class="stit" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,50px);font-weight:300">Meal Deals</h2><span class="skj">お得なセット</span></div>
+  <div class="cbw">
+    <div><span class="ctg">★ Most Popular Deal</span><div class="ctit">The Izakaya Experience</div><p class="cds">The complete Kuroyuki journey for two — share plates, grill bites, sake, and sweetness.</p><div class="cpb"><span class="cw">$95</span><span class="cn">$76</span><span class="csv">Save $19</span></div>
+    <button class="nb nb-order" style="margin-top:16px;font-size:11px" onclick="addComboToCart()"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Add Deal to Order — $76</button>
+    </div>
+    <div class="cvd"></div>
+    <div><span class="ctg">Includes (for 2)</span><ul class="cl"><li>Karaage Chicken <span style="color:var(--gold)">$14</span></li><li>Edamame Shichimi <span style="color:var(--gold)">$7</span></li><li>Any 2 Robata Skewer Mains <span style="color:var(--gold)">up to $54</span></li><li>Matcha Tiramisu ×2 <span style="color:var(--gold)">$24</span></li><li>House Sake 180ml ×2 <span style="color:var(--gold)">$22</span></li></ul></div>
+  </div>
+</div></div>
+<span class="sep"></span>
+
+<!-- DESSERTS -->
+<div style="background:#090706;position:relative;z-index:2">
+<section class="sec" id="desserts">
+  <div class="sh fu"><span class="stag">The Final Bow</span><h2 class="stit">Desserts</h2><span class="skj">甘味・デザート</span></div>
+  <div class="mg fu" id="desserts-grid">
+    <div class="mc" data-tags="veg special" onclick="openModal('tiramisu')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=85" alt="Matcha Tiramisu" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Matcha Tiramisu<span class="mjp">抹茶ティラミス</span></div><div class="mp">$12</div></div><p class="md">Ceremonial Uji matcha cream layered over sake-soaked ladyfingers, dusted with dark matcha powder.</p><div class="mbd"><span class="badge bv">🌿 Veg</span><span class="badge bc">✦ Signature</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('tiramisu','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('tiramisu','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="veg gf" onclick="openModal('pannacotta')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=85" alt="Panna Cotta" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Black Sesame Panna Cotta<span class="mjp">黒ゴマのパンナコッタ</span></div><div class="mp">$11</div></div><p class="md">Silken panna cotta with roasted black sesame paste, wildflower honey, and gold leaf.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('pannacotta','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('pannacotta','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" data-tags="veg" onclick="openModal('yuzutart')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=85" alt="Yuzu Tart" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Yuzu Tart<span class="mjp">柚子タルト</span></div><div class="mp">$10</div></div><p class="md">Crisp buckwheat shell, yuzu curd, torched meringue, and a candied yuzu peel.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('yuzutart','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();openModal('yuzutart','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+  </div>
+</section></div>
+<span class="sep"></span>
+
+<!-- DRINKS -->
+<div style="background:linear-gradient(180deg,#090706,#0c0a07,#090706);position:relative;z-index:2">
+<section class="sec" id="drinks">
+  <div class="sh fu"><span class="stag">The Bar</span><h2 class="stit">Drinks &amp; Sake</h2><span class="skj">お飲み物・日本酒</span></div>
+  <div class="ch fu"><div><div class="cjp">日本酒</div><div class="ct">Sake Selection</div><div class="cs">Served at ideal temperature per style</div></div></div>
+  <div class="dg fu" id="drinks-grid">
+    <div class="mc" onclick="openModal('dassai')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1609951651556-5334e2706168?w=600&q=85" alt="Dassai Sake" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Dassai 23 Junmai Daiginjo<span class="mjp">獺祭 二割三分</span></div><div class="mp">$18/90ml</div></div><p class="md">Fruity, ultra-refined. Melon and pear notes. Chilled. Yamaguchi Prefecture.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('dassai','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();quickAddToCart('dassai')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Add to Order</button></div></div></div>
+    <div class="mc" onclick="openModal('hakkaisan')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1519671282429-b44b4f14a4a4?w=600&q=85" alt="Hakkaisan" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Hakkaisan Honjozo<span class="mjp">八海山 本醸造</span></div><div class="mp">$11/90ml</div></div><p class="md">Clean, dry, elegant. Rice and mineral forward. Served warm. Niigata Prefecture.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('hakkaisan','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();quickAddToCart('hakkaisan')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Add to Order</button></div></div></div>
+    <div class="mc" onclick="openModal('nigori')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1548933122-5fedf3661c57?w=600&q=85" alt="Nigori" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Nigori Unfiltered Sake<span class="mjp">にごり酒</span></div><div class="mp">$13/90ml</div></div><p class="md">Cloudy, creamy, slightly sweet with a fizzy finish. Served chilled.</p><div class="card-btns"><button class="nb nb-info" onclick="event.stopPropagation();openModal('nigori','nutrition')"><svg class="nb-info-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Info</button><button class="nb nb-order" onclick="event.stopPropagation();quickAddToCart('nigori')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Add to Order</button></div></div></div>
+  </div>
+  <div class="ch fu" style="margin-top:20px"><div><div class="cjp">飲物</div><div class="ct">Non-Alcoholic</div><div class="cs">Crafted beverages</div></div></div>
+  <div class="dg fu">
+    <div class="mc" onclick="openModal('hojicha')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&q=85" alt="Hojicha" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Hojicha Latte<span class="mjp">焙じ茶ラテ</span></div><div class="mp">$6</div></div><p class="md">Roasted green tea, oat milk, light brown sugar. Hot or iced.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-order" onclick="event.stopPropagation();openModal('hojicha','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+    <div class="mc" onclick="openModal('yuzusoda')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=85" alt="Yuzu Soda" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Yuzu Sparkling Soda<span class="mjp">柚子ソーダ</span></div><div class="mp">$5</div></div><p class="md">Fresh yuzu juice, sparkling water, a touch of honey. Refreshing and bright.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-order" onclick="event.stopPropagation();quickAddToCart('yuzusoda')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Add to Order</button></div></div></div>
+    <div class="mc" onclick="openModal('matcha')"><div class="miw"><img class="mi" src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=85" alt="Matcha" loading="lazy"></div><div class="mb"><div class="mt2"><div class="mn">Ceremonial Matcha<span class="mjp">抹茶</span></div><div class="mp">$8</div></div><p class="md">Uji ceremonial matcha whisked to order, in a hand-thrown ceramic bowl. Hot or over ice.</p><div class="mbd"><span class="badge bv">🌿 Veg</span></div><div class="card-btns"><button class="nb nb-order" onclick="event.stopPropagation();openModal('matcha','customize')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>Customize</button></div></div></div>
+  </div>
+</section></div>
+
+<footer>
+  <span class="fk">黒雪居酒屋</span>
+  <div class="fn">Kuroyuki Izakaya &amp; Robatayaki</div>
+  <div class="fa">290 King Street West, Toronto, ON M5V 1J2 · 416-902-7740<br>kuroyuki.to · @kuroyuki.to</div>
+  <div class="fhs">
+    <div class="fh"><span class="dy">Mon–Thu</span><span class="tm">5:00 pm – 11:00 pm</span></div>
+    <div class="fh"><span class="dy">Friday</span><span class="tm">4:00 pm – 1:00 am</span></div>
+    <div class="fh"><span class="dy">Sat–Sun</span><span class="tm">4:00 pm – 1:00 am</span></div>
+  </div>
+  <div class="fls"><a href="#">Instagram</a><a href="#">Reservations</a><a href="#">Gift Cards</a><a href="#">Private Dining</a></div>
+  <div class="fcp">© 2025 Kuroyuki Izakaya · Menus seasonal and subject to change · À la Carte</div>
+</footer>
+
+<!-- DETAIL MODAL -->
+<div class="mov" id="mov" onclick="closeOv(event)">
+  <div class="mod" id="mod">
+    <div class="moh"><img id="mimg" src="" alt=""></div>
+    <button class="mox" onclick="closeModal()">✕</button>
+    <div class="mob">
+      <div class="moname" id="mname"></div>
+      <span class="mojp" id="mjp"></span>
+      <div class="mopr" id="mpr"></div>
+      <!-- RATING -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div class="stars-row" id="starsRow"></div>
+        <span class="review-count" id="reviewCount"></span>
+      </div>
+      <p class="mods" id="mds"></p>
+      <!-- TABS -->
+      <div class="mtabs">
+        <button class="mtab active" onclick="switchTab('nutrition',this)">Nutrition</button>
+        <button class="mtab" onclick="switchTab('customize',this)">Customize &amp; Order</button>
+      </div>
+      <!-- NUTRITION PANEL -->
+      <div class="tpanel active" id="panel-nutrition">
+        <span class="ntit">Nutrition Facts — Per Serving</span>
+        <div class="ng" id="ng"></div>
+        <div class="nbs" id="nbs"></div>
+        <div><span style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:8px">Allergens</span><div class="ar" id="ar"></div></div>
+      </div>
+      <!-- CUSTOMIZE PANEL -->
+      <div class="tpanel" id="panel-customize">
+        <!-- SIZE -->
+        <div class="cust-section" id="size-section">
+          <div class="cust-title">Portion Size</div>
+          <div class="size-row" id="sizeRow"></div>
+        </div>
+        <!-- SPICE -->
+        <div class="cust-section" id="spice-section">
+          <div class="cust-title">Spice Level</div>
+          <div class="spice-row">
+            <button class="spice-btn" onclick="setSpice(0,this)" title="No heat">💧</button>
+            <button class="spice-btn active" onclick="setSpice(1,this)" title="Mild">🌶</button>
+            <button class="spice-btn" onclick="setSpice(2,this)" title="Medium">🌶🌶</button>
+            <button class="spice-btn" onclick="setSpice(3,this)" title="Hot">🌶🌶🌶</button>
+            <span class="spice-label" id="spiceLabel">Mild</span>
+          </div>
+        </div>
+        <!-- TEMPERATURE (drinks) -->
+        <div class="cust-section" id="temp-section" style="display:none">
+          <div class="cust-title">Serving Temperature</div>
+          <div class="opt-row" id="tempRow">
+            <button class="opt-btn active" onclick="selectOpt('temp',this)">Hot</button>
+            <button class="opt-btn" onclick="selectOpt('temp',this)">Iced</button>
+          </div>
+        </div>
+        <!-- TOGGLE INGREDIENTS -->
+        <div class="cust-section">
+          <div class="cust-title">Ingredients — tap to remove</div>
+          <div class="ing-grid" id="ingGrid"></div>
+        </div>
+        <!-- ADD-ONS -->
+        <div class="cust-section" id="addon-section">
+          <div class="cust-title">Add-Ons</div>
+          <div class="addon-grid" id="addonGrid"></div>
+        </div>
+        <!-- SAUCE -->
+        <div class="cust-section" id="sauce-section">
+          <div class="cust-title">Sauce on the Side</div>
+          <div class="opt-row" id="sauceRow"></div>
+        </div>
+        <!-- NOTES -->
+        <div class="cust-section">
+          <div class="cust-title">Special Requests</div>
+          <textarea class="notes-area" id="specialNotes" placeholder="Allergy notes, special requests, celebrations..."></textarea>
+        </div>
+        <!-- ORDER SUMMARY -->
+        <div class="order-summary">
+          <div><div class="os-label">Your Total</div><div style="font-size:12px;color:var(--mist);margin-top:2px" id="osMods">Base price</div></div>
+          <div class="os-price" id="osPrice">$0</div>
+        </div>
+        <button class="add-to-order-btn" onclick="addCurrentToCart()">✦ Add to Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <div class="cart-title">Your Order</div>
+    <div class="cart-sub" id="cartSubtitle">0 items</div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span class="cart-empty-jp">空</span>Your order is empty.<br>Explore the menu and customize your experience.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <div class="cart-total-label">Subtotal</div>
+      <div class="cart-total-price" id="cartTotal">$0.00</div>
+    </div>
+    <button class="cart-checkout-btn" onclick="checkout()">Proceed to Checkout →</button>
+    <button class="cart-clear" onclick="clearCart()">Clear all items</button>
+  </div>
+</div>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+document.querySelectorAll('a,button,.mc,.nlinks li').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function ra(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(ra)})();
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  const scrolled=scrollY>60;
+  document.getElementById('nav').classList.toggle('sc',scrolled);
+  document.getElementById('fbar').style.display=scrolled?'flex':'none';
+});
+
+// FADE-UP
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.fu').forEach(f=>obs.observe(f));
+
+// PARTICLES
+const canvas=document.getElementById('ptc'),ctx=canvas.getContext('2d');
+let W,H,ps=[];
+function rs(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+rs();window.addEventListener('resize',rs);
+class P{constructor(){this.r2()}r2(){this.x=Math.random()*W;this.y=Math.random()*H+H;this.vy=-(Math.random()*.35+.08);this.vx=(Math.random()-.5)*.12;this.r=Math.random()*1.3+.3;this.a=Math.random()*.22+.05;this.col=Math.random()>.5?'201,168,76':'200,82,10'}up(){this.x+=this.vx;this.y+=this.vy;if(this.y<-10)this.r2()}dr(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(${this.col},${this.a})`;ctx.fill()}}
+for(let i=0;i<90;i++)ps.push(new P());
+(function ap(){ctx.clearRect(0,0,W,H);ps.forEach(p=>{p.up();p.dr()});requestAnimationFrame(ap)})();
+
+// DATA
+const data={
+  toro:{name:"Toro Tartare with Black Truffle",jp:"とろのタルタル・黒トリュフ添え",basePrice:28,price:"$28",img:"https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800&q=90",desc:"Hand-chopped bluefin toro, Hokkaido uni, black truffle shavings, and a dashi-soy emulsion. Served on cold stone with crisp nori crisps and yuzu kosho.",cal:310,pro:28,fat:18,car:8,al:["Fish","Soy","Sesame","Shellfish"],
+    ingredients:["Bluefin Toro","Hokkaido Uni","Black Truffle","Dashi-Soy Emulsion","Nori Crisps","Yuzu Kosho"],
+    addons:[{n:"Extra Truffle Shavings",p:6},{n:"Wagyu Tartare Mix-In",p:12},{n:"Crispy Shallots",p:2},{n:"Ponzu Gel",p:3}],
+    sizes:[{l:"Solo",p:0},{l:"Sharing",p:8}],
+    sauces:["Original","Ponzu","Spicy Miso","Truffle Oil"],
+    hasSpice:false,hasDrink:false,rating:4.9,reviews:142},
+  edamame:{name:"Edamame Shichimi",jp:"枝豆・七味",basePrice:7,price:"$7",img:"https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&q=85",desc:"Steamed young soybeans tossed in brown butter, togarashi, and fine sea salt.",cal:155,pro:13,fat:7,car:10,al:["Soy"],
+    ingredients:["Young Soybeans","Brown Butter","Togarashi","Sea Salt"],
+    addons:[{n:"Extra Togarashi",p:1},{n:"Truffle Butter",p:3}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:3}],
+    sauces:["No Sauce","Ponzu","Lemon"],
+    hasSpice:true,hasDrink:false,rating:4.7,reviews:89},
+  agedashi:{name:"Agedashi Tofu",jp:"揚げ出し豆腐",basePrice:12,price:"$12",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&q=85",desc:"House-pressed silken tofu, lightly fried in rice flour, in a smoky dashi broth with grated daikon and katsuobushi.",cal:220,pro:12,fat:11,car:18,al:["Soy","Fish","Gluten"],
+    ingredients:["Silken Tofu","Rice Flour","Dashi Broth","Grated Daikon","Katsuobushi"],
+    addons:[{n:"Extra Dashi",p:2},{n:"Soft Boiled Egg",p:3},{n:"Green Onion",p:1}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:4}],
+    sauces:["Classic Dashi","Spicy Dashi","Ponzu"],
+    hasSpice:true,hasDrink:false,rating:4.6,reviews:67},
+  karaage:{name:"Karaage Chicken",jp:"鶏の唐揚げ",basePrice:14,price:"$14",img:"https://images.unsplash.com/photo-1630431341973-02e1b662ec35?w=800&q=85",desc:"Double-fried Cornish hen thighs marinated in ginger, sake, and white soy. Served with kewpie mayo and pickled ginger.",cal:420,pro:34,fat:24,car:22,al:["Soy","Egg","Gluten"],
+    ingredients:["Cornish Hen Thighs","Ginger","Sake","White Soy","Kewpie Mayo","Pickled Ginger"],
+    addons:[{n:"Extra Mayo",p:1},{n:"Spicy Mayo",p:1},{n:"Lemon Wedge",p:1},{n:"Add Egg",p:3}],
+    sizes:[{l:"5pc",p:0},{l:"8pc",p:5},{l:"12pc",p:9}],
+    sauces:["Kewpie Mayo","Spicy Mayo","Ponzu","Tare Glaze"],
+    hasSpice:true,hasDrink:false,rating:4.8,reviews:203},
+  tataki:{name:"Salmon Tataki",jp:"サーモンたたき",basePrice:17,price:"$17",img:"https://images.unsplash.com/photo-1559410545-0bdcd187e0a6?w=800&q=85",desc:"Lightly seared Hokkaido salmon over ponzu jelly, crispy shallots, micro shiso, and sesame oil.",cal:280,pro:26,fat:14,car:9,al:["Fish","Soy","Sesame"],
+    ingredients:["Hokkaido Salmon","Ponzu Jelly","Crispy Shallots","Micro Shiso","Sesame Oil"],
+    addons:[{n:"Extra Salmon Piece",p:6},{n:"Avocado Slices",p:4},{n:"Tobiko",p:3}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:6}],
+    sauces:["Ponzu","Yuzu Dressing","Sesame"],
+    hasSpice:false,hasDrink:false,rating:4.7,reviews:115},
+  tunarice:{name:"Spicy Tuna Crispy Rice",jp:"スパイシーツナ・クリスピーライス",basePrice:19,price:"$19",img:"https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=85",desc:"Golden fried sushi rice cakes topped with spicy tuna, cucumber, and sriracha aioli.",cal:370,pro:22,fat:15,car:38,al:["Fish","Egg","Soy","Sesame"],
+    ingredients:["Sushi Rice","Spicy Tuna","Cucumber","Sriracha Aioli","Sesame"],
+    addons:[{n:"Extra Rice Cake",p:5},{n:"Avocado",p:3},{n:"Tobiko",p:4},{n:"Jalapeño",p:1}],
+    sizes:[{l:"4pc",p:0},{l:"6pc",p:5}],
+    sauces:["Sriracha Aioli","Spicy Mayo","Soy-Ponzu"],
+    hasSpice:true,hasDrink:false,rating:4.9,reviews:178},
+  wagyu:{name:"Wagyu Beef Skewers ×3",jp:"和牛串焼き",basePrice:32,price:"$32",img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=90",desc:"A5 Miyazaki Wagyu, medium-rare, finished with truffle salt and fresh wasabi root.",cal:520,pro:36,fat:38,car:2,al:["Soy"],
+    ingredients:["A5 Miyazaki Wagyu","Truffle Salt","Fresh Wasabi","White Soy Glaze"],
+    addons:[{n:"Extra Skewer",p:12},{n:"Wagyu Sashimi Add-On",p:18},{n:"Garlic Chips",p:3},{n:"Foie Gras Topping",p:16}],
+    sizes:[{l:"×3",p:0},{l:"×5",p:20},{l:"×7",p:38}],
+    sauces:["Tare","Ponzu","Wasabi Soy","Truffle Salt"],
+    hasSpice:false,hasDrink:false,rating:5.0,reviews:89,doneness:true},
+  shioyaki:{name:"Salmon Shioyaki",jp:"鮭の塩焼き",basePrice:26,price:"$26",img:"https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=85",desc:"Whole deboned Hokkaido salmon fillet, salt-grilled to crispy skin perfection. Served with sudachi wedge and pickled cucumbers.",cal:350,pro:42,fat:18,car:4,al:["Fish"],
+    ingredients:["Hokkaido Salmon","Sea Salt","Sudachi","Pickled Cucumber","Dashi Rice"],
+    addons:[{n:"Extra Dashi Rice",p:3},{n:"Soft Egg",p:3},{n:"Butter Finish",p:2}],
+    sizes:[{l:"Half",p:0},{l:"Whole",p:12}],
+    sauces:["Ponzu","Lemon","Sudachi","Yuzu Kosho"],
+    hasSpice:false,hasDrink:false,rating:4.8,reviews:134},
+  blackcod:{name:"Miso Black Cod",jp:"銀だらの西京焼き",basePrice:34,price:"$34",img:"https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=800&q=85",desc:"Saikyo miso-marinated black cod, baked three days. Silken, caramelized, paired with dashi-drenched rice.",cal:390,pro:38,fat:16,car:22,al:["Fish","Soy","Gluten"],
+    ingredients:["Black Cod","Saikyo White Miso","Sake","Mirin","Dashi Rice"],
+    addons:[{n:"Extra Dashi Rice",p:3},{n:"Pickled Vegetables",p:3},{n:"Truffle Oil Drizzle",p:5}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:14}],
+    sauces:["Natural Miso Glaze","Yuzu Butter","Dashi"],
+    hasSpice:false,hasDrink:false,rating:4.9,reviews:167},
+  dengaku:{name:"Kinoko Dengaku",jp:"きのこ田楽",basePrice:18,price:"$18",img:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=800&q=85",desc:"Maitake, shiitake, and king oyster mushrooms grilled with sweet white miso glaze.",cal:195,pro:8,fat:6,car:26,al:["Soy","Gluten"],
+    ingredients:["Maitake Mushrooms","Shiitake","King Oyster","White Miso","Sake Glaze"],
+    addons:[{n:"Truffle Shavings",p:6},{n:"Parmesan",p:3},{n:"Crispy Shallots",p:2}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:6}],
+    sauces:["White Miso","Red Miso","Truffle Butter","Ponzu"],
+    hasSpice:false,hasDrink:false,rating:4.6,reviews:72},
+  ramen:{name:"Spicy Tonkotsu Ramen",jp:"辛口豚骨ラーメン",basePrice:21,price:"$21",img:"https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=800&q=90",desc:"18-hour pork broth, wavy hakata noodles, chashu belly, marinated egg, nori, and black garlic oil.",cal:680,pro:38,fat:28,car:72,al:["Gluten","Egg","Soy","Sesame"],
+    ingredients:["18hr Pork Broth","Hakata Noodles","Chashu Belly","Marinated Egg","Nori","Black Garlic Oil","Bamboo Shoots","Green Onion"],
+    addons:[{n:"Extra Chashu",p:5},{n:"Extra Egg",p:3},{n:"Corn",p:2},{n:"Butter",p:2},{n:"Extra Noodles",p:3}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:4}],
+    sauces:["Classic Tare","Extra Black Garlic","Spicy Miso"],
+    hasSpice:true,hasDrink:false,rating:4.9,reviews:289},
+  gyoza:{name:"Prawn & Shiso Gyoza ×6",jp:"海老と紫蘇の餃子",basePrice:16,price:"$16",img:"https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=800&q=85",desc:"Pan-fried dumplings filled with tiger prawn, shiso, and water chestnut. Served with yuzu ponzu dipping sauce.",cal:310,pro:18,fat:12,car:34,al:["Shellfish","Gluten","Soy","Sesame"],
+    ingredients:["Tiger Prawn","Shiso","Water Chestnut","Dumpling Wrapper","Sesame Oil"],
+    addons:[{n:"Extra Gyoza ×3",p:8},{n:"Chili Oil",p:2},{n:"Garlic Ponzu",p:2}],
+    sizes:[{l:"×6",p:0},{l:"×9",p:8},{l:"×12",p:14}],
+    sauces:["Yuzu Ponzu","Chili Oil","Sesame Soy"],
+    hasSpice:true,hasDrink:false,rating:4.7,reviews:156},
+  tsukune:{name:"Duck Tsukune",jp:"鴨のつくね",basePrice:22,price:"$22",img:"https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=800&q=85",desc:"Minced duck and shiso meatballs, glazed in tare sauce, served with a slow-cooked egg and scallion.",cal:380,pro:32,fat:22,car:12,al:["Egg","Soy","Gluten"],
+    ingredients:["Minced Duck","Shiso","Tare Glaze","Slow-Cooked Egg","Scallion"],
+    addons:[{n:"Extra Skewer",p:8},{n:"Foie Gras Topping",p:14},{n:"Truffle Tare",p:4}],
+    sizes:[{l:"×3",p:0},{l:"×5",p:14}],
+    sauces:["Tare","Yuzu Miso","Ponzu"],
+    hasSpice:false,hasDrink:false,rating:4.8,reviews:98,doneness:true},
+  tiramisu:{name:"Matcha Tiramisu",jp:"抹茶ティラミス",basePrice:12,price:"$12",img:"https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=800&q=85",desc:"Ceremonial Uji matcha cream layered over sake-soaked ladyfingers, dusted with dark matcha powder.",cal:340,pro:6,fat:18,car:38,al:["Gluten","Egg","Dairy"],
+    ingredients:["Uji Matcha Cream","Sake-Soaked Ladyfingers","Dark Matcha Powder","Mascarpone"],
+    addons:[{n:"Gold Leaf",p:4},{n:"Extra Matcha Dusting",p:1},{n:"Azuki Bean",p:2}],
+    sizes:[{l:"Regular",p:0},{l:"Double",p:8}],
+    sauces:["No Sauce","Matcha Coulis","Honey Drizzle"],
+    hasSpice:false,hasDrink:false,rating:4.9,reviews:112},
+  pannacotta:{name:"Black Sesame Panna Cotta",jp:"黒ゴマのパンナコッタ",basePrice:11,price:"$11",img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=85",desc:"Silken panna cotta with roasted black sesame paste, wildflower honey, and gold leaf.",cal:295,pro:5,fat:20,car:26,al:["Dairy","Sesame"],
+    ingredients:["Cream","Black Sesame Paste","Wildflower Honey","Gold Leaf","Agar"],
+    addons:[{n:"Extra Gold Leaf",p:3},{n:"Yuzu Compote",p:3}],
+    sizes:[{l:"Regular",p:0}],
+    sauces:["Honey","Yuzu","Sesame Caramel"],
+    hasSpice:false,hasDrink:false,rating:4.7,reviews:83},
+  yuzutart:{name:"Yuzu Tart",jp:"柚子タルト",basePrice:10,price:"$10",img:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=85",desc:"Crisp buckwheat shell, yuzu curd, torched meringue, and a candied yuzu peel. Bright and citrus-forward.",cal:260,pro:4,fat:12,car:34,al:["Gluten","Egg","Dairy"],
+    ingredients:["Buckwheat Shell","Yuzu Curd","Torched Meringue","Candied Yuzu Peel"],
+    addons:[{n:"Yuzu Sorbet Scoop",p:5},{n:"Whipped Cream",p:2}],
+    sizes:[{l:"Single",p:0},{l:"2-Pack",p:8}],
+    sauces:["No Sauce","Yuzu Coulis","Honey"],
+    hasSpice:false,hasDrink:false,rating:4.8,reviews:91},
+  dassai:{name:"Dassai 23 Junmai Daiginjo",jp:"獺祭 二割三分",basePrice:18,price:"$18/90ml",img:"https://images.unsplash.com/photo-1609951651556-5334e2706168?w=800&q=85",desc:"Fruity, ultra-refined, delicate melon and pear notes. Chilled. Yamaguchi Prefecture.",cal:110,pro:0,fat:0,car:5,al:[],
+    ingredients:["Junmai Daiginjo Sake","Yamaguchi Rice","Spring Water"],
+    addons:[{n:"Upgrade to 180ml",p:16}],sizes:[{l:"90ml",p:0},{l:"180ml",p:16},{l:"Bottle",p:75}],sauces:[],hasSpice:false,hasDrink:true,rating:4.8,reviews:54},
+  hakkaisan:{name:"Hakkaisan Honjozo",jp:"八海山 本醸造",basePrice:11,price:"$11/90ml",img:"https://images.unsplash.com/photo-1519671282429-b44b4f14a4a4?w=800&q=85",desc:"Clean, dry, and elegant. Rice and mineral forward. Served warm. Niigata Prefecture.",cal:95,pro:0,fat:0,car:4,al:[],
+    ingredients:["Honjozo Sake","Niigata Rice","Snow Melt Water"],
+    addons:[{n:"Upgrade to 180ml",p:10}],sizes:[{l:"90ml",p:0},{l:"180ml",p:10},{l:"Bottle",p:55}],sauces:[],hasSpice:false,hasDrink:true,rating:4.7,reviews:41},
+  nigori:{name:"Nigori Unfiltered Sake",jp:"にごり酒",basePrice:13,price:"$13/90ml",img:"https://images.unsplash.com/photo-1548933122-5fedf3661c57?w=800&q=85",desc:"Cloudy, creamy, slightly sweet with a fizzy finish. A crowd favourite. Served chilled.",cal:125,pro:1,fat:0,car:8,al:[],
+    ingredients:["Unfiltered Sake","Nigori Lees","Spring Water"],
+    addons:[{n:"Upgrade to 180ml",p:12}],sizes:[{l:"90ml",p:0},{l:"180ml",p:12},{l:"Bottle",p:65}],sauces:[],hasSpice:false,hasDrink:true,rating:4.9,reviews:77},
+  hojicha:{name:"Hojicha Latte",jp:"焙じ茶ラテ",basePrice:6,price:"$6",img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=85",desc:"Roasted green tea, oat milk, light brown sugar. Hot or iced.",cal:90,pro:2,fat:3,car:14,al:["Oat"],
+    ingredients:["Hojicha Leaves","Oat Milk","Brown Sugar","Vanilla"],
+    addons:[{n:"Oat Milk Upgrade",p:1},{n:"Extra Shot",p:2},{n:"Honey Instead",p:0}],
+    sizes:[{l:"8oz",p:0},{l:"12oz",p:2}],sauces:[],hasSpice:false,hasDrink:true,rating:4.6,reviews:62},
+  yuzusoda:{name:"Yuzu Sparkling Soda",jp:"柚子ソーダ",basePrice:5,price:"$5",img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=85",desc:"Fresh yuzu juice, sparkling water, a touch of honey. Refreshing and bright.",cal:55,pro:0,fat:0,car:13,al:[],
+    ingredients:["Fresh Yuzu Juice","Sparkling Water","Honey","Ice"],
+    addons:[{n:"Extra Yuzu",p:2},{n:"Mint",p:1}],
+    sizes:[{l:"Regular",p:0},{l:"Large",p:2}],sauces:[],hasSpice:false,hasDrink:true,rating:4.7,reviews:48},
+  matcha:{name:"Ceremonial Matcha",jp:"抹茶",basePrice:8,price:"$8",img:"https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=800&q=85",desc:"Uji ceremonial matcha whisked to order, served in a hand-thrown ceramic bowl. Hot or over ice.",cal:10,pro:1,fat:0,car:2,al:[],
+    ingredients:["Uji Ceremonial Matcha","Spring Water"],
+    addons:[{n:"Oat Milk Add",p:2},{n:"Honey",p:1},{n:"Upgrade to Koicha",p:4}],
+    sizes:[{l:"Small",p:0},{l:"Large",p:3}],sauces:[],hasSpice:false,hasDrink:true,rating:4.9,reviews:93}
+};
+
+// STATE
+let currentId=null, currentPrice=0, selectedSize=0, selectedAddons=new Set(), removedIngredients=new Set(), spiceLevel=1, selectedSauce=null, selectedDoneness=null;
+
+// FILTER
+function filterMenu(tag, btn) {
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.mc').forEach(card=>{
+    if(tag==='all'){card.classList.remove('hidden');return;}
+    const tags=(card.dataset.tags||'');
+    card.classList.toggle('hidden',!tags.includes(tag));
+  });
+}
+
+// STARS
+function renderStars(rating){
+  const full=Math.floor(rating),half=rating%1>=.5;
+  let html='';
+  for(let i=1;i<=5;i++){
+    if(i<=full)html+=`<span class="star" style="color:#e8c97a">★</span>`;
+    else if(i===full+1&&half)html+=`<span class="star" style="color:#e8c97a">☆</span>`;
+    else html+=`<span class="star" style="color:rgba(201,168,76,.2)">★</span>`;
+  }
+  return html;
+}
+
+// MODAL
+function openModal(id, tab='nutrition'){
+  const d=data[id]; if(!d) return;
+  currentId=id;
+  currentPrice=0;
+  selectedSize=0; selectedAddons=new Set(); removedIngredients=new Set();
+  spiceLevel=d.hasSpice?1:0; selectedSauce=d.sauces[0]||null; selectedDoneness=d.doneness?'Medium-Rare':null;
+  document.getElementById('mimg').src=d.img;
+  document.getElementById('mname').textContent=d.name;
+  document.getElementById('mjp').textContent=d.jp;
+  document.getElementById('mpr').textContent=d.price;
+  document.getElementById('mds').textContent=d.desc;
+  document.getElementById('starsRow').innerHTML=renderStars(d.rating);
+  document.getElementById('reviewCount').textContent=`${d.rating} · ${d.reviews} reviews`;
+
+  // NUTRITION
+  document.getElementById('ng').innerHTML=`
+    <div class="nc"><span class="nv">${d.cal}</span><span class="nu">kcal</span><span class="nl">Calories</span></div>
+    <div class="nc"><span class="nv">${d.pro}g</span><span class="nu">per serving</span><span class="nl">Protein</span></div>
+    <div class="nc"><span class="nv">${d.fat}g</span><span class="nu">per serving</span><span class="nl">Total Fat</span></div>
+    <div class="nc"><span class="nv">${d.car}g</span><span class="nu">per serving</span><span class="nl">Carbs</span></div>`;
+  const bars=[{l:'Calories',v:d.cal,max:800,cls:'c'},{l:'Protein',v:d.pro,max:60,cls:'p'},{l:'Fat',v:d.fat,max:50,cls:'f'},{l:'Carbs',v:d.car,max:80,cls:'k'}];
+  document.getElementById('nbs').innerHTML=bars.map(b=>{
+    const pct=Math.min(100,Math.round(b.v/b.max*100));
+    return`<div class="nbr"><span class="nbl">${b.l}</span><div class="nbt"><div class="nbf ${b.cls}" data-p="${pct}" style="width:0"></div></div><span class="nbp">${pct}%</span></div>`;
+  }).join('');
+  document.getElementById('ar').innerHTML=d.al.length?d.al.map(a=>`<span class="al2">${a}</span>`).join(''):'<span style="font-size:13px;color:var(--mist);font-style:italic">None identified</span>';
+
+  // SIZES
+  const sizeRow=document.getElementById('sizeRow');
+  sizeRow.innerHTML=d.sizes.map((s,i)=>`<button class="size-btn${i===0?' active':''}" onclick="selectSize(${i},${s.p},this)"><span>${s.l}</span><span class="size-price">${s.p===0?'Base':'+'+(s.p>0?'$'+s.p:'')}</span></button>`).join('');
+
+  // SPICE
+  const spiceSection=document.getElementById('spice-section');
+  spiceSection.style.display=d.hasSpice?'block':'none';
+  document.querySelectorAll('.spice-btn').forEach((b,i)=>b.classList.toggle('active',i===1));
+  document.getElementById('spiceLabel').textContent='Mild';
+
+  // TEMP (drinks)
+  const tempSection=document.getElementById('temp-section');
+  tempSection.style.display=d.hasDrink?'block':'none';
+
+  // DONENESS
+  const ss=document.getElementById('sauce-section');
+  if(d.doneness){
+    ss.querySelector('.cust-title').textContent='Doneness';
+    const opts=['Rare','Medium-Rare','Medium','Well Done'];
+    document.getElementById('sauceRow').innerHTML=opts.map(o=>`<button class="opt-btn${o==='Medium-Rare'?' active':''}" onclick="selectOpt('sauce',this)">${o}</button>`).join('');
+    selectedDoneness='Medium-Rare';
+  } else if(d.sauces.length){
+    ss.querySelector('.cust-title').textContent='Sauce Preference';
+    document.getElementById('sauceRow').innerHTML=d.sauces.map((s,i)=>`<button class="opt-btn${i===0?' active':''}" onclick="selectOpt('sauce',this)">${s}</button>`).join('');
+    selectedSauce=d.sauces[0];
+  }
+  ss.style.display=(d.doneness||d.sauces.length)?'block':'none';
+
+  // INGREDIENTS
+  document.getElementById('ingGrid').innerHTML=d.ingredients.map(ing=>`
+    <div class="ing-item" onclick="toggleIng(this,'${ing}')">
+      <div class="ing-toggle">✓</div>
+      <span class="ing-name">${ing}</span>
+    </div>`).join('');
+
+  // ADD-ONS
+  document.getElementById('addonGrid').innerHTML=d.addons.map((a,i)=>`
+    <div class="addon-item" onclick="toggleAddon(${i},${a.p},this)">
+      <div class="addon-left"><div class="addon-check"></div><span class="addon-name">${a.n}</span></div>
+      <span class="addon-price">+$${a.p}</span>
+    </div>`).join('');
+
+  // Clear notes
+  document.getElementById('specialNotes').value='';
+  
+  // Switch tab
+  const tabs=document.querySelectorAll('.mtab');
+  switchTab(tab, tab==='customize'?tabs[tabs.length-1]:tabs[0]);
+  
+  document.getElementById('mov').classList.add('open');
+  document.getElementById('mod').scrollTop=0;
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{document.querySelectorAll('.nbf').forEach(el=>{el.style.width=el.dataset.p+'%'})},200);
+  updateOrderSummary();
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('active'));
+  if(btn){
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.mtab').forEach(t=>{if(t.textContent.toLowerCase().includes(name))t.classList.add('active')});
+  }
+  const panel=document.getElementById(`panel-${name}`);
+  if(panel) panel.classList.add('active');
+  if(name==='nutrition'){
+    setTimeout(()=>{document.querySelectorAll('.nbf').forEach(el=>{el.style.width=el.dataset.p+'%'})},100);
+  }
+}
+
+function selectSize(i, extra, btn){
+  selectedSize=extra;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updateOrderSummary();
+}
+function toggleIng(el, name){
+  if(removedIngredients.has(name)) removedIngredients.delete(name);
+  else removedIngredients.add(name);
+  el.classList.toggle('removed');
+  const toggle=el.querySelector('.ing-toggle');
+  toggle.textContent=removedIngredients.has(name)?'✗':'✓';
+}
+function toggleAddon(i, price, el){
+  const key=i;
+  if(selectedAddons.has(key)){selectedAddons.delete(key);el.classList.remove('selected');el.querySelector('.addon-check').textContent='';}
+  else{selectedAddons.add(key);el.classList.add('selected');el.querySelector('.addon-check').textContent='✓';}
+  updateOrderSummary();
+}
+function setSpice(level, btn){
+  spiceLevel=level;
+  document.querySelectorAll('.spice-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const labels=['No Heat','Mild','Medium','Hot 🔥'];
+  document.getElementById('spiceLabel').textContent=labels[level];
+}
+function selectOpt(type, btn){
+  const row=btn.closest('.opt-row');
+  if(row) row.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(type==='sauce'){
+    const d=data[currentId];
+    if(d&&d.doneness) selectedDoneness=btn.textContent;
+    else selectedSauce=btn.textContent;
+  }
+  if(type==='temp'){}
+}
+
+function updateOrderSummary(){
+  const d=data[currentId];if(!d)return;
+  let total=d.basePrice+selectedSize;
+  let modParts=[];
+  if(selectedSize>0){
+    const sizeBtn=document.querySelector('.size-btn.active');
+    if(sizeBtn)modParts.push(sizeBtn.querySelector('span').textContent);
+  }
+  selectedAddons.forEach(i=>{
+    const a=d.addons[i];
+    total+=a.p;
+    modParts.push(a.n);
+  });
+  currentPrice=total;
+  document.getElementById('osPrice').textContent=`$${total}`;
+  document.getElementById('osMods').textContent=modParts.length?modParts.join(', '):'Base price';
+}
+
+function addCurrentToCart(){
+  const d=data[currentId];if(!d)return;
+  const mods=[];
+  if(d.hasSpice){const labels=['No Heat','Mild','Medium','Hot 🔥'];mods.push('Spice: '+labels[spiceLevel]);}
+  if(d.doneness&&selectedDoneness)mods.push('Doneness: '+selectedDoneness);
+  else if(selectedSauce)mods.push('Sauce: '+selectedSauce);
+  if(removedIngredients.size)mods.push('Remove: '+[...removedIngredients].join(', '));
+  const notes=document.getElementById('specialNotes').value.trim();
+  const sizeBtn=document.querySelector('.size-btn.active');
+  const sizeLabel=sizeBtn?sizeBtn.querySelector('span').textContent:null;
+  addToCart(currentId, sizeLabel, mods, notes, [...selectedAddons].map(i=>d.addons[i].n), currentPrice-d.basePrice, notes);
+  closeModal();
+}
+
+// CART
+let cartItems=[];
+function addToCart(id, size, mods, notes, addonNames, extraCost, specialNotes){
+  const d=data[id];
+  const totalPrice=d.basePrice+extraCost;
+  const modStr=[...( mods||[]),...(addonNames||[])].filter(Boolean);
+  cartItems.push({id,name:d.name,price:totalPrice,mods:modStr,notes:specialNotes||'',qty:1});
+  renderCart();
+  showToast(`✦ ${d.name} added to order`);
+  bumpCartCount();
+}
+function quickAddToCart(id){
+  const d=data[id];if(!d)return;
+  addToCart(id,null,[],'',[],0,'');
+}
+function addComboToCart(){
+  cartItems.push({id:'combo',name:'The Izakaya Experience (for 2)',price:76,mods:['Karaage Chicken','Edamame Shichimi','2× Robata Mains','Matcha Tiramisu ×2','House Sake 180ml ×2'],notes:'',qty:1});
+  renderCart();
+  showToast('✦ Izakaya Experience added!');
+  bumpCartCount();
+}
+function renderCart(){
+  const el=document.getElementById('cartItems');
+  const count=cartItems.reduce((a,i)=>a+i.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartSubtitle').textContent=`${count} item${count!==1?'s':''}`;
+  if(!cartItems.length){
+    el.innerHTML='<div class="cart-empty"><span class="cart-empty-jp">空</span>Your order is empty.<br>Explore the menu and customize your experience.</div>';
+    document.getElementById('cartTotal').textContent='$0.00';
+    return;
+  }
+  let total=0;
+  el.innerHTML=cartItems.map((item,idx)=>{
+    total+=item.price*item.qty;
+    return`<div class="cart-item">
+      <div class="ci-top"><span class="ci-name">${item.name}</span><span class="ci-price">$${(item.price*item.qty).toFixed(2)}</span></div>
+      ${item.mods.length?`<div class="ci-mods">${item.mods.join(' · ')}</div>`:''}
+      ${item.notes?`<div class="ci-mods">"${item.notes}"</div>`:''}
+      <div class="ci-qty">
+        <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+        <button class="ci-remove" onclick="removeItem(${idx})">Remove</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('cartTotal').textContent=`$${total.toFixed(2)}`;
+}
+function changeQty(idx,delta){
+  cartItems[idx].qty=Math.max(1,cartItems[idx].qty+delta);
+  renderCart();
+}
+function removeItem(idx){
+  cartItems.splice(idx,1);
+  renderCart();
+}
+function clearCart(){
+  if(!cartItems.length)return;
+  cartItems=[];
+  renderCart();
+  showToast('Order cleared');
+}
+function checkout(){
+  if(!cartItems.length){showToast('Add items to your order first');return;}
+  const total=cartItems.reduce((a,i)=>a+i.price*i.qty,0);
+  showToast(`✦ Order sent — Total: $${total.toFixed(2)} · Thank you!`);
+  setTimeout(()=>{cartItems=[];renderCart();closeCart();},1500);
+}
+function toggleCart(){
+  document.getElementById('cartPanel').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+function closeCart(){
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+function bumpCartCount(){
+  const el=document.getElementById('cartCount');
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+  // Open cart briefly
+  document.getElementById('cartPanel').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+function closeModal(){document.getElementById('mov').classList.remove('open');document.body.style.overflow='';}
+function closeOv(e){if(e.target===document.getElementById('mov'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCart();}});
+</script>
+</body>
+</html>
